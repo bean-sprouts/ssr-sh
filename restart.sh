@@ -1,2 +1,2 @@
 #!/bin/bash
-~/shadowsocksr/shadowsocks/server.py -d restart
+./shadowsocksr/shadowsocks/server.py -d restart

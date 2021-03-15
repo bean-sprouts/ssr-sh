@@ -1,2 +1,2 @@
 #!/usr/bin
-~/shadowsocksr/shadowsocks/server.py -d start
+./shadowsocksr/shadowsocks/server.py -d start
