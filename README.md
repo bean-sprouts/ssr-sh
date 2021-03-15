@@ -6,7 +6,12 @@
 
 ### 新服务器
 
-对于新建的服务器可以手动执行`init_server.sh`
+新服务器可以手动执行`init_server.sh`的内容用于服务器初始化，会执行以下操作：
+
+- 关闭防火墙
+- 更新yum源为阿里源
+- 安装git、lrzsz、vim等工具
+- 拉取本项目
 
 ```shell
 #!/bin/bash
@@ -19,28 +24,46 @@ wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-
 yum makecache
 # 安装git
 yum install -y git lrzsz vim
-# 拉取本项目
+# 拉取ssr
+# git clone -b manyuser https://github.com/shadowsocksr-backup/shadowsocksr.git
+# 拉取本项目,已包含ssr客户端
 git clone https://github.com/bean-sprouts/ssr-sh.git && cd ssh-sh
-# 
-cd ./shadowsocksr && bash ./initcfg.sh && cd ~/ssh-sh/
-# 加反斜线才不会提示是否输入yes覆盖
-\cp -f ./user-config.json ./shadowsocksr/user-config.json
-sh ./start.sh
-# sh ./bbr.sh
+# 初始化
+# sh ./init.sh
 ```
 
-会执行以下操作：
+### 修改配置文件`user-config.json`
 
-- 关闭防火墙
-- 更新yum源为阿里源
-- 安装git、lrzsz、vim等工具
-- 拉取本项目
-- 初始化ssr并修改用户配置文件
+```shell
+{
+    ...
+    // 端口
+    "server_port": 6666,
+    ...
+    // 密码
+    "password": "123456",
+    // 加密方法
+    "method": "aes-256-cfb",
+    // 协议
+    "protocol": "auth_aes128_md5",
+    ...
+     // 混淆
+    "obfs": "tls1.2_ticket_auth_compatible",
+    ...
+}
+```
+
+### 初始化
+
+直接执行`init.sh`即可，会执行以下操作：
+
+- 初始化ssr
+- 覆盖ssr配置文件
 - 启动ssr
 
-### 已有服务器
-
-
+```shell
+sh init.sh
+```
 
 ## bbr脚本
 
